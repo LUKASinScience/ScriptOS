@@ -1,0 +1,37 @@
+[project]
+site_name = "ScriptOS"
+site_description = "Turn a Python or R script into a validated, reproducible desktop app — no terminal required."
+site_author = "Lukas W. Bauer"
+
+nav = [
+  { "Guide" = "index.md" },
+]
+
+[project.theme]
+favicon = "assets/logo.png"
+language = "en"
+logo = "assets/logo.png"
+features = [
+  "navigation.top",
+  "navigation.sections",
+  "content.code.copy",
+  "search.highlight",
+]
+
+[[project.theme.palette]]
+scheme = "slate"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+scheme = "default"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to dark mode"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+toc.permalink = true
+pymdownx.highlight.anchor_linenums = true
+pymdownx.superfences = {}
+pymdownx.tabbed.alternate_style = true

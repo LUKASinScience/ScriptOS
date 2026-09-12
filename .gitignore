@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Build artifacts (PyInstaller)
+build/
+dist/
+ScriptOS.spec
+
+# Test run output
+tests/fixtures/runs/
+runs/
+
+# zensical docs site build output + cache (regenerate with: zensical build)
+site/
+.cache/
+
+# pytest cache
+.pytest_cache/
+
+# Editors
+.vscode/
+.idea/
+.DS_Store
+
+# Claude Code local session state + historical planning docs — local-only, never shared
+.claude/
+CLAUDE.md
+CLAUDE_shared.md
+scientific-tool-wrapper-v2.md

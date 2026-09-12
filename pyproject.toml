@@ -1,0 +1,17 @@
+[project]
+name = "scientific-tool-wrapper"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[project.scripts]
+scriptos = "app.cli:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
