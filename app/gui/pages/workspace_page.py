@@ -30,6 +30,7 @@ from app.core.tool import Parameter, ParameterType, Tool
 from app.discovery.file_heuristics import is_output_param
 from app.discovery.python_parser import parse_python_script
 from app.discovery.r_parser import parse_r_script
+from app.discovery.risk_scan import scan_risks
 from app.environments import assignments, credentials, venv_manager
 from app.execution.command_builder import build_command, interpreter_bin
 from app.gui.components.file_field import BoolField, FileField
@@ -177,6 +178,23 @@ class WorkspacePage(QWidget):
         self.validation_label = QLabel("")
         self.validation_label.setWordWrap(True)
         layout.addWidget(self.validation_label)
+
+        limits_row = QHBoxLayout()
+        limits_row.addWidget(QLabel("Memory limit (MB):"))
+        self.memory_limit_edit = QLineEdit()
+        self.memory_limit_edit.setPlaceholderText("unlimited")
+        self.memory_limit_edit.setFixedWidth(90)
+        limits_row.addWidget(self.memory_limit_edit)
+        limits_row.addWidget(QLabel("CPU limit (%):"))
+        self.cpu_limit_edit = QLineEdit()
+        self.cpu_limit_edit.setPlaceholderText("unlimited")
+        self.cpu_limit_edit.setFixedWidth(90)
+        limits_row.addWidget(self.cpu_limit_edit)
+        limits_row.addStretch()
+        layout.addLayout(limits_row)
+        limits_hint = QLabel("Leave blank to run unrestricted. A safety net for runaway scripts, not a security sandbox.")
+        limits_hint.setStyleSheet(f"color: {COLORS['text_dim']}; font-size: 11px;")
+        layout.addWidget(limits_hint)
         layout.addStretch()
 
         self.run_btn = QPushButton(" Run")
@@ -452,6 +470,17 @@ class WorkspacePage(QWidget):
                 "call will fail immediately instead of hanging — move those values to command-line flags."
             )
 
+        if self.tool.interpreter == "python":
+            risks = scan_risks(self.tool.script_path)
+            if risks:
+                risk_lines = "<br>".join(html.escape(r) for r in risks)
+                text += (
+                    f"<br><br><span style='color:{COLORS['danger']}'>⚠ This script contains potentially "
+                    f"risky code:</span><br>{risk_lines}<br>"
+                    f"<span style='color:{COLORS['text_dim']}'>Not a security verdict — just a heads-up. "
+                    "Review the script if you don't trust its source before running it.</span>"
+                )
+
         self.analysis_card.setText(text)
 
     def _render_form(self):
@@ -529,15 +558,26 @@ class WorkspacePage(QWidget):
         # runs/ folder — the script's own field is what the user actually cares about
         return Path(self._default_runs_dir() if _find_output_param(self.tool) else self._resolve_output_location())
 
+    def _parsed_limit(self, field: QLineEdit) -> float | None:
+        text = field.text().strip()
+        if not text:
+            return None
+        try:
+            return float(text)
+        except ValueError:
+            return None
+
     def run_tool(self):
         command = build_command(self.tool, self._values(), self._selected_env)
         runs_base = self._current_runs_base()
         extra_env = credentials.resolve_env(self._selected_credential_set) if self._selected_credential_set else None
+        max_memory_mb = self._parsed_limit(self.memory_limit_edit)
+        max_cpu_percent = self._parsed_limit(self.cpu_limit_edit)
         self.log_view.clear()
         self.run_btn.hide()
         self.stop_btn.show()
 
-        self.worker = RunWorker(self.tool.name, command, runs_base, extra_env)
+        self.worker = RunWorker(self.tool.name, command, runs_base, extra_env, max_memory_mb, max_cpu_percent)
         self.worker.line_received.connect(self._append_log)
         self.worker.finished_run.connect(self._on_finished)
         self.worker.start()

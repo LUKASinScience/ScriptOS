@@ -14,10 +14,20 @@ class RunWorker(QThread):
     line_received = Signal(str, str)
     finished_run = Signal(int, float)
 
-    def __init__(self, tool_name: str, command: list[str], runs_base: Path, extra_env: dict[str, str] | None = None):
+    def __init__(
+        self,
+        tool_name: str,
+        command: list[str],
+        runs_base: Path,
+        extra_env: dict[str, str] | None = None,
+        max_memory_mb: float | None = None,
+        max_cpu_percent: float | None = None,
+    ):
         super().__init__()
         self.tool_name, self.command, self.runs_base = tool_name, command, runs_base
         self.extra_env = extra_env
+        self.max_memory_mb = max_memory_mb
+        self.max_cpu_percent = max_cpu_percent
         self.run_dir: Path | None = None
         self._proc = None
 
@@ -30,6 +40,8 @@ class RunWorker(QThread):
                 on_line=lambda stream, text: self.line_received.emit(stream, text),
                 on_process_started=lambda proc: setattr(self, "_proc", proc),
                 extra_env=self.extra_env,
+                max_memory_mb=self.max_memory_mb,
+                max_cpu_percent=self.max_cpu_percent,
             )
             self.run_dir = result.run_dir
             self.finished_run.emit(result.exit_code, result.duration_seconds)

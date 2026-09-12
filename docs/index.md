@@ -6,9 +6,10 @@ Turn a Python or R command-line script into a validated, reproducible desktop ap
 
 ## Appearance
 
-**View → Appearance → Dark / Light** in the menu bar. Takes effect after a restart
-(ScriptOS offers to restart immediately) — icons and colors are baked in at
-startup, so a live switch isn't worth the complexity for a rarely-toggled setting.
+**Light mode is the default.** Switch via **View → Appearance → Dark / Light** in
+the menu bar. Takes effect after a restart (ScriptOS offers to restart
+immediately) — icons and colors are baked in at startup, so a live switch
+isn't worth the complexity for a rarely-toggled setting.
 
 ## Starting the app
 
@@ -141,6 +142,21 @@ argparse flags. The analysis card warns about both: no configurable parameters, 
 a script that would otherwise hang forever waiting for typed input (ScriptOS makes
 it fail fast with a clear error instead).
 
+### 9. Check a script for risky code before running it
+
+Load `tests/fixtures/risky_script.py` — it uses `eval()`, `os.system()`, and
+`pickle.loads()`. The analysis card flags each one with a plain-language reason.
+This is a static heads-up, not a security verdict — a script that hides what it's
+doing can still slip past it, so only run scripts from sources you trust.
+
+### 10. Stop a runaway script automatically
+
+Load `tests/fixtures/memory_hog.py`, set **Memory limit (MB)** to `50`, and run it —
+it allocates far more than that and gets killed automatically, with the reason
+shown in the log. Leave both limit fields blank (the default) to run unrestricted.
+This is a safety net for scripts that spiral out of control, not an isolation
+boundary — a script can still do anything your user account can until a limit is hit.
+
 ## Installing R
 
 ScriptOS detects whether `Rscript` is on your system and tells you how to fix it if not:
@@ -158,3 +174,5 @@ Rscript -e 'install.packages("optparse", repos="https://cloud.r-project.org")'
 - Not a replacement for the command line for people who already use it
 - Never installs anything without you clicking a button first
 - Never touches your OS keychain — the secrets wallet is entirely local to `~/.scriptos`
+- Not a security sandbox — the risk scan and resource limits are heads-ups and
+  safety nets, not isolation; only run scripts from sources you trust

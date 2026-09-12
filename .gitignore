@@ -6,10 +6,11 @@ __pycache__/
 .venv/
 venv/
 
-# Build artifacts (PyInstaller)
+# Build artifacts (PyInstaller / DMG)
 build/
 dist/
 ScriptOS.spec
+ScriptOS.dmg
 
 # Test run output
 tests/fixtures/runs/

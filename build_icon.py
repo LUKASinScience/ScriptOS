@@ -50,7 +50,10 @@ def main():
             render(size * 2).save(str(ICONSET / f"icon_{size}x{size}@2x.png"))
     subprocess.run(["iconutil", "-c", "icns", str(ICONSET), "-o", "app_icon.icns"], check=True)
     render(512).save("docs/assets/logo.png")
-    print("Wrote app_icon.icns and docs/assets/logo.png")
+    # ponytail: single 256x256 frame, not a proper multi-resolution .ico — fine for
+    # modern Windows, upgrade to multi-size if it ever looks rough at small sizes.
+    render(256).save("app_icon.ico", "ico")
+    print("Wrote app_icon.icns, app_icon.ico, and docs/assets/logo.png")
 
 
 if __name__ == "__main__":

@@ -51,9 +51,9 @@ COLORS_LIGHT = {
 
 def load_theme_name() -> str:
     try:
-        return json.loads(_PREF_PATH.read_text()).get("theme", "dark")
+        return json.loads(_PREF_PATH.read_text()).get("theme", "light")
     except (OSError, json.JSONDecodeError):
-        return "dark"
+        return "light"
 
 
 def save_theme_name(name: str):

@@ -284,8 +284,14 @@ class EnvironmentsPage(QWidget):
             QMessageBox.information(self, "Nothing to open", "Pick an environment and/or a directory first.")
             return
         script = command.replace("\\", "\\\\").replace('"', '\\"')
+        apple_script = (
+            f'tell application "Terminal"\n'
+            f'  do script "{script}"\n'
+            f'  activate\n'
+            f'end tell'
+        )
         try:
-            subprocess.run(["osascript", "-e", f'tell application "Terminal" to do script "{script}"'], check=True)
+            subprocess.run(["osascript", "-e", apple_script], check=True)
         except (subprocess.CalledProcessError, FileNotFoundError) as exc:
             QMessageBox.warning(self, "Could not open Terminal", str(exc))
 
