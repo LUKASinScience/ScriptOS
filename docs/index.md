@@ -53,6 +53,7 @@ project folder and follow along exactly. Nothing here needs the internet except
 the one-time environment/package installs.
 
 ### 1. Run a plain script (no dependencies, no environment needed)
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 1. Launch ScriptOS, drag `tests/fixtures/analyze.py` onto the window.
 2. The analysis card shows: 5 parameters detected, no dependencies (stdlib only).
@@ -62,6 +63,7 @@ the one-time environment/package installs.
    tab — that's your reproducibility record (exact command, parameters, duration).
 
 ### 2. Create an environment and install real dependencies
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 1. Click **Environments** (top right) → **Environments** tab → **+ New environment**,
    name it `demo`.
@@ -80,6 +82,7 @@ the one-time environment/package installs.
    you'll see "Activated for: plot_histogram.py" and its on-disk location.
 
 ### 3. Store a secret in the wallet and use it in a run
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 1. **Environments → Secrets Wallet tab → + New set**, name it `Demo Credentials`,
    enter a key like `API_TOKEN` and any test value.
@@ -92,6 +95,7 @@ the one-time environment/package installs.
    `cat ~/.scriptos/credentials.enc.json` yourself; it's ciphertext, not your value.
 
 ### 4. Run an R script
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 1. Install R once if you haven't: `brew install r`
 2. Install the one R package ScriptOS's discovery relies on:
@@ -101,6 +105,7 @@ the one-time environment/package installs.
    just a different interpreter under the hood.
 
 ### 5. Chain two scripts as a workflow
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 Workflows are a simple linear chain — not a full pipeline engine. Each step's
 declared output feeds the next step's first file/directory input, automatically.
@@ -112,6 +117,7 @@ declared output feeds the next step's first file/directory input, automatically.
    receives step 1's output location and reads it back — no path typed by hand.
 
 ### 6. Use the command line (for people who already live in a terminal)
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 ScriptOS ships a small `scriptos` CLI that shares the same environments and
 manifests as the GUI:
@@ -128,6 +134,7 @@ copyable `source .../bin/activate` line — that's a plain Python venv, so any
 tool that understands venvs (including your own shell) works with it directly.
 
 ### 7. Power Terminal: jump straight into a directory + environment
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 For working from a plain terminal without keeping a tab open just to stay
 oriented. Two independent wallets you mix and match:
@@ -143,6 +150,7 @@ a saved directory from the two dropdowns, get a copyable `cd ... && source
 Terminal.app window already sitting in that directory with that environment active.
 
 ### 8. See what a script without CLI flags looks like
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 Load `tests/fixtures/interactive_script.py` — it calls `input()` and has zero
 argparse flags. The analysis card warns about both: no configurable parameters, and
@@ -150,6 +158,7 @@ a script that would otherwise hang forever waiting for typed input (ScriptOS mak
 it fail fast with a clear error instead).
 
 ### 9. Check a script for risky code before running it
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 Load `tests/fixtures/risky_script.py` — it uses `eval()`, `os.system()`, and
 `pickle.loads()`. The analysis card flags each one with a plain-language reason.
@@ -157,6 +166,7 @@ This is a static heads-up, not a security verdict — a script that hides what i
 doing can still slip past it, so only run scripts from sources you trust.
 
 ### 10. Stop a runaway script automatically
+> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 Load `tests/fixtures/memory_hog.py`, set **Memory limit (MB)** to `50`, and run it —
 it allocates far more than that and gets killed automatically, with the reason
