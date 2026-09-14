@@ -29,16 +29,14 @@ complete walkthrough using the example scripts in `tests/fixtures/`.
 
 ## Installing
 
-**macOS:** grab `ScriptOS.dmg` from a release, or build it yourself:
+Grab the latest build from **[Releases](../../releases/latest)** — no Python, no terminal:
 
-```bash
-./build.sh          # produces dist/ScriptOS.app
-./make_dmg.sh        # produces ScriptOS.dmg
-```
+- **macOS:** download `ScriptOS.dmg`, open it, drag ScriptOS into Applications
+- **Windows:** download `ScriptOS-windows.zip`, unzip it, run `ScriptOS.exe`
 
-**Windows:** see [`BUILD_WINDOWS.md`](BUILD_WINDOWS.md) — must be built on a
-Windows machine (or via the included GitHub Actions workflow); PyInstaller
-doesn't cross-compile.
+Releases are built automatically by [`.github/workflows/release.yml`](.github/workflows/release.yml)
+whenever a `v*` tag is pushed. To build a copy yourself instead, see
+[`BUILD_WINDOWS.md`](BUILD_WINDOWS.md) (Windows) or run `./build.sh && ./make_dmg.sh` (macOS).
 
 ## Developing
 

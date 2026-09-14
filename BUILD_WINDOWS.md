@@ -1,16 +1,19 @@
 # Building ScriptOS for Windows
 
-PyInstaller doesn't cross-compile — a Windows `.exe` can only be built by
-actually running PyInstaller on Windows. Two ways to get one:
+Most people don't need this — download `ScriptOS-windows.zip` from
+**[Releases](../../releases/latest)**, unzip, and run `ScriptOS.exe`. It's
+built automatically by `.github/workflows/release.yml` on every tagged
+release.
+
+This doc is only for building a copy yourself. PyInstaller doesn't
+cross-compile — a Windows `.exe` can only be built by actually running
+PyInstaller on Windows. Two ways:
 
 ## Option A: GitHub Actions (no Windows machine needed)
 
-This repo includes `.github/workflows/build-windows.yml`, which builds on
-GitHub's own Windows runner.
-
 1. Push this repo to GitHub (or push a tag like `v0.1.0`).
-2. Go to **Actions → Build Windows app → Run workflow** (or just push a `v*` tag).
-3. Download the `ScriptOS-windows` artifact when it finishes — that's `dist/ScriptOS/ScriptOS.exe` and its supporting files.
+2. Go to **Actions → Release → Run workflow** (or just push a `v*` tag).
+3. Download the `ScriptOS-windows.zip` artifact when it finishes.
 
 ## Option B: On an actual Windows machine
 

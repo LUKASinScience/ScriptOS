@@ -1,0 +1,65 @@
+name: Release
+
+# Builds real, ready-to-run installers for both platforms and attaches them to
+# a GitHub Release — so end users only ever download ScriptOS.dmg or
+# ScriptOS-windows.zip, never build anything themselves.
+#
+# PyInstaller doesn't cross-compile, so macOS and Windows each build on their
+# own GitHub-hosted runner.
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: |
+          python3 -m venv .venv
+          .venv/bin/pip install -q PySide6 cryptography psutil pyinstaller -e .
+      - name: Build .app and .dmg
+        run: |
+          ./build.sh
+          ./make_dmg.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ScriptOS.dmg
+          path: ScriptOS.dmg
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build ScriptOS.exe
+        run: build_windows.bat
+      - name: Zip
+        run: Compress-Archive -Path dist/ScriptOS/* -DestinationPath ScriptOS-windows.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ScriptOS-windows.zip
+          path: ScriptOS-windows.zip
+
+  release:
+    needs: [macos, windows]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ScriptOS.dmg/ScriptOS.dmg
+            ScriptOS-windows.zip/ScriptOS-windows.zip

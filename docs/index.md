@@ -15,16 +15,23 @@ isn't worth the complexity for a rarely-toggled setting.
 
 === "macOS (installed)"
 
-    Double-click **ScriptOS** in Applications, or Spotlight-search for "ScriptOS".
+    Download `ScriptOS.dmg` from the repo's GitHub Releases page,
+    open it, and drag ScriptOS into Applications. Then double-click **ScriptOS**
+    in Applications, or Spotlight-search for "ScriptOS".
 
-=== "macOS (build it yourself)"
+=== "Windows (installed)"
+
+    Download `ScriptOS-windows.zip` from the repo's GitHub Releases page,
+    unzip it anywhere, and run `ScriptOS.exe`.
+
+=== "Build it yourself"
 
     ```bash
-    ./build.sh
-    open dist/ScriptOS.app
-    # optional: copy it to Applications so it behaves like any other Mac app
-    cp -R dist/ScriptOS.app /Applications/
+    ./build.sh          # macOS: produces dist/ScriptOS.app
+    ./make_dmg.sh        # macOS: produces ScriptOS.dmg
     ```
+
+    On Windows, run `build_windows.bat` — see [BUILD_WINDOWS.md](../BUILD_WINDOWS.md).
 
 === "Developer mode"
 
