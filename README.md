@@ -54,3 +54,7 @@ python3 -m venv .venv
 - Never installs anything without you clicking a button first
 - Never touches your OS keychain — the secrets wallet is entirely local to `~/.scriptos`
 - Not a security sandbox — the risk scan and resource limits are heads-ups and safety nets, not isolation
+
+## License
+
+[MIT](LICENSE)
