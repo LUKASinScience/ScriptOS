@@ -31,7 +31,7 @@ isn't worth the complexity for a rarely-toggled setting.
     ./make_dmg.sh        # macOS: produces ScriptOS.dmg
     ```
 
-    On Windows, run `build_windows.bat` — see [BUILD_WINDOWS.md](../BUILD_WINDOWS.md).
+    On Windows, run `build_windows.bat` — see BUILD_WINDOWS.md in the repo root.
 
 === "Developer mode"
 
