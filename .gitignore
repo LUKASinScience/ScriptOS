@@ -33,3 +33,8 @@ site/
 CLAUDE.md
 CLAUDE_shared.md
 scientific-tool-wrapper-v2.md
+
+# Local-only asset generators — outputs (app_icon.*, docs/assets/*.png) stay tracked,
+# scripts themselves are only ever run locally
+build_icon.py
+build_mockup.py
