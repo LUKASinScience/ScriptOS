@@ -42,6 +42,7 @@ jobs:
           python-version: "3.11"
       - name: Build ScriptOS.exe
         run: build_windows.bat
+        shell: cmd
       - name: Zip
         run: Compress-Archive -Path dist/ScriptOS/* -DestinationPath ScriptOS-windows.zip
       - uses: actions/upload-artifact@v4
