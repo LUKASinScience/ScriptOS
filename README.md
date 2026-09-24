@@ -4,6 +4,8 @@ Turn a Python or R command-line script into a validated, reproducible desktop ap
 
 ![ScriptOS running on macOS](docs/assets/macbook-mockup.png)
 
+![ScriptOS demo: drag in a script, form auto-generated from its flags, risky-code check, environments, secrets wallet, power terminal](docs/assets/scriptos-demo.gif)
+
 ## What it does
 
 Drag a `.py` or `.R` script onto ScriptOS and it:

@@ -53,7 +53,7 @@ project folder and follow along exactly. Nothing here needs the internet except
 the one-time environment/package installs.
 
 ### 1. Run a plain script (no dependencies, no environment needed)
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![analyze.py after a successful run: logs and a reproducibility summary](assets/shots/analyze-run.png)
 
 1. Launch ScriptOS, drag `tests/fixtures/analyze.py` onto the window.
 2. The analysis card shows: 5 parameters detected, no dependencies (stdlib only).
@@ -63,7 +63,7 @@ the one-time environment/package installs.
    tab — that's your reproducibility record (exact command, parameters, duration).
 
 ### 2. Create an environment and install real dependencies
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![Analysis card showing a missing dependency](assets/shots/env-missing-dep.png)
 
 1. Click **Environments** (top right) → **Environments** tab → **+ New environment**,
    name it `demo`.
@@ -73,8 +73,13 @@ the one-time environment/package installs.
    checked against whatever's currently selected in the **Environment** dropdown.
 4. Set the **Environment** dropdown to `demo`. The dependency list re-checks against
    that environment — still missing there too.
+
+   ![Naming a new environment](assets/shots/env-create-dialog.png)
+
 5. Click **Install missing dependencies into this environment**. Watch pip run live;
    when it's done, both packages show ✓.
+
+   ![Dependency resolved after install, environment attached to the script](assets/shots/env-installed.png)
 6. Fill **Input** with `tests/fixtures/samples.csv`, leave **Output Dir** as `.`, click **Run**.
 7. Open the **Files** tab — `histogram.png` is listed; double-click to open it.
 8. Reload the same script later (or reopen ScriptOS) — the `demo` environment is
@@ -82,7 +87,7 @@ the one-time environment/package installs.
    you'll see "Activated for: plot_histogram.py" and its on-disk location.
 
 ### 3. Store a secret in the wallet and use it in a run
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![Secrets Wallet tab](assets/shots/secrets-wallet.png)
 
 1. **Environments → Secrets Wallet tab → + New set**, name it `Demo Credentials`,
    enter a key like `API_TOKEN` and any test value.
@@ -105,7 +110,7 @@ the one-time environment/package installs.
    just a different interpreter under the hood.
 
 ### 5. Chain two scripts as a workflow
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![Workflows page](assets/shots/workflows.png)
 
 Workflows are a simple linear chain — not a full pipeline engine. Each step's
 declared output feeds the next step's first file/directory input, automatically.
@@ -134,7 +139,7 @@ copyable `source .../bin/activate` line — that's a plain Python venv, so any
 tool that understands venvs (including your own shell) works with it directly.
 
 ### 7. Power Terminal: jump straight into a directory + environment
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![Power Terminal tab](assets/shots/power-terminal.png)
 
 For working from a plain terminal without keeping a tab open just to stay
 oriented. Two independent wallets you mix and match:
@@ -158,7 +163,7 @@ a script that would otherwise hang forever waiting for typed input (ScriptOS mak
 it fail fast with a clear error instead).
 
 ### 9. Check a script for risky code before running it
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![Risky-code warning on the analysis card](assets/shots/risky-script.png)
 
 Load `tests/fixtures/risky_script.py` — it uses `eval()`, `os.system()`, and
 `pickle.loads()`. The analysis card flags each one with a plain-language reason.
