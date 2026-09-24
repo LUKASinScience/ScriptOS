@@ -4,7 +4,7 @@ Turn a Python or R command-line script into a validated, reproducible desktop ap
 
 ![ScriptOS running on macOS](docs/assets/macbook-mockup.png)
 
-![ScriptOS demo: drag in a script, form auto-generated from its flags, risky-code check, environments, secrets wallet, power terminal](docs/assets/scriptos-demo.gif)
+**[📖 Full guide](docs/index.md)** — a complete walkthrough using the example scripts in `tests/fixtures/`.
 
 ## What it does
 
@@ -23,11 +23,6 @@ Plus, for people who manage more than one script:
 - **Secrets Wallet** — encrypted local storage for API keys/passwords a script needs, injected as environment variables at run time, never shown in the command preview
 - **Workflows** — chain scripts sequentially, each step's output auto-wired into the next step's input
 - **CLI + Power Terminal** — a `scriptos` command line companion, plus a directory + environment picker that opens a terminal already `cd`'d and `source activate`'d
-
-## Full guide
-
-See **[docs/index.md](docs/index.md)** (or `zensical serve` for the built site) for a
-complete walkthrough using the example scripts in `tests/fixtures/`.
 
 ## Installing
 
