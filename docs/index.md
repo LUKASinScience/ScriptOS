@@ -100,7 +100,7 @@ the one-time environment/package installs.
    `cat ~/.scriptos/credentials.enc.json` yourself; it's ciphertext, not your value.
 
 ### 4. Run an R script
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![runnable_r_tool.R after a successful run](assets/shots/r-script-run.png)
 
 1. Install R once if you haven't: `brew install r`
 2. Install the one R package ScriptOS's discovery relies on:
@@ -122,7 +122,6 @@ declared output feeds the next step's first file/directory input, automatically.
    receives step 1's output location and reads it back — no path typed by hand.
 
 ### 6. Use the command line (for people who already live in a terminal)
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 ScriptOS ships a small `scriptos` CLI that shares the same environments and
 manifests as the GUI:
@@ -155,7 +154,7 @@ a saved directory from the two dropdowns, get a copyable `cd ... && source
 Terminal.app window already sitting in that directory with that environment active.
 
 ### 8. See what a script without CLI flags looks like
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
+![interactive_script.py failing fast with EOFError instead of hanging](assets/shots/interactive-error.png)
 
 Load `tests/fixtures/interactive_script.py` — it calls `input()` and has zero
 argparse flags. The analysis card warns about both: no configurable parameters, and
@@ -171,7 +170,6 @@ This is a static heads-up, not a security verdict — a script that hides what i
 doing can still slip past it, so only run scripts from sources you trust.
 
 ### 10. Stop a runaway script automatically
-> 🖼️ *Screenshot placeholder — add a screenshot of this step.*
 
 Load `tests/fixtures/memory_hog.py`, set **Memory limit (MB)** to `50`, and run it —
 it allocates far more than that and gets killed automatically, with the reason
