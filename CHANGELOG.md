@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0
 
 - Static risk scan for Python scripts (flags `eval`, `os.system`, `pickle.loads`, etc.) shown on the analysis card
 - Optional memory/CPU limits that auto-kill a runaway run
@@ -8,6 +8,9 @@
 - Power Terminal now brings the opened Terminal.app window to the foreground
 - GitHub Actions release pipeline: pushing a `v*` tag builds `ScriptOS.dmg` (macOS) and `ScriptOS-windows.zip` (Windows) and attaches them to a GitHub Release
 - MIT license
+- Fixed: interpreter detection (R, Python) missing Homebrew installs in GUI-launched builds
+- Fixed: Windows CI build running under the wrong shell
+- Real screenshots and a complete walkthrough guide
 
 ## 0.1.0
 
