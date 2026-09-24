@@ -4,7 +4,7 @@ Turn a Python or R command-line script into a validated, reproducible desktop ap
 
 ![ScriptOS running on macOS](docs/assets/macbook-mockup.png)
 
-**[📖 Full guide]([docs/index.md](https://lukasinscience.github.io/ScriptOS/))** — a complete walkthrough using the example scripts in `tests/fixtures/`.
+**[📖 Full guide](https://lukasinscience.github.io/ScriptOS/)** — a complete walkthrough using the example scripts in `tests/fixtures/`.
 
 ## What it does
 
