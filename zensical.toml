@@ -2,6 +2,7 @@
 site_name = "ScriptOS"
 site_description = "Turn a Python or R script into a validated, reproducible desktop app — no terminal required."
 site_author = "Lukas W. Bauer"
+extra_css = ["assets/extra.css"]
 
 nav = [
   { "Guide" = "index.md" },

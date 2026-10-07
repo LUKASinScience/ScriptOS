@@ -1,41 +1,70 @@
 # ScriptOS
 
-Turn a Python or R command-line script into a validated, reproducible desktop app — **no terminal required.**
+**Run Python and R scripts like a real app — no terminal, no setup headaches.**
+
+[Download](https://github.com/LUKASinScience/ScriptOS/releases/latest){ .md-button .md-button--primary target="_blank" rel="noopener" }
+[Quick start](#your-first-run-in-2-minutes){ .md-button }
 
 ![ScriptOS running on macOS](assets/macbook-mockup.png)
 
-## Appearance
+## Why ScriptOS
 
-**Light mode is the default.** Switch via **View → Appearance → Dark / Light** in
-the menu bar. Takes effect after a restart (ScriptOS offers to restart
-immediately) — icons and colors are baked in at startup, so a live switch
-isn't worth the complexity for a rarely-toggled setting.
+- **Point, click, run.** Load a script and ScriptOS builds the form for its parameters — no flags to remember.
+- **Dependencies handled.** It shows what a script needs and installs it into an isolated environment, only when you click.
+- **Safe by default.** A risk scan warns about suspicious code, and memory/time limits stop runaway scripts.
+- **Secrets stay secret.** API keys live in an encrypted local wallet and never appear in the command line.
+- **Reproducible.** Same script, same environment, same result — every time.
 
-## Starting the app
+## Installing and starting ScriptOS
+
+Grab the latest version from the
+[ScriptOS Releases page](https://github.com/LUKASinScience/ScriptOS/releases/latest){ target="_blank" rel="noopener" }
+(a new tab opens — come back here when you're done), then follow the steps for your system.
 
 === "macOS (installed)"
 
-    Download `ScriptOS.dmg` from the repo's GitHub Releases page,
-    open it, and drag ScriptOS into Applications. Then double-click **ScriptOS**
-    in Applications, or Spotlight-search for "ScriptOS".
+    1. On the Releases page, under **Assets**, click **`ScriptOS.dmg`** to download it.
+    2. Open the downloaded file (double-click it in your *Downloads* folder). A window appears
+       showing the ScriptOS icon and an *Applications* folder.
+    3. **Drag the ScriptOS icon onto the Applications folder.** Wait for the copy to finish,
+       then eject the disk image (right-click → *Eject*).
+    4. Open **Applications** and double-click **ScriptOS** — or press **Cmd + Space**, type
+       "ScriptOS" and hit Return.
+
+    !!! note "First launch: \"ScriptOS can't be opened\""
+        macOS is cautious with apps downloaded outside the App Store. If you see this warning,
+        **right-click ScriptOS → Open → Open** once. After that it starts normally. Details:
+        [Apple: open an app from an unidentified developer](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac){ target="_blank" rel="noopener" }.
 
 === "Windows (installed)"
 
-    Download `ScriptOS-windows.zip` from the repo's GitHub Releases page,
-    unzip it anywhere, and run `ScriptOS.exe`.
+    1. On the [Releases page](https://github.com/LUKASinScience/ScriptOS/releases/latest){ target="_blank" rel="noopener" },
+       under **Assets**, click **`ScriptOS-windows.zip`** to download it.
+    2. Right-click the downloaded file → **Extract All…** and pick any folder
+       (for example *Documents*). Don't run it from inside the zip.
+    3. Open the new folder and double-click **`ScriptOS.exe`**.
+
+    !!! note "First launch: \"Windows protected your PC\""
+        Click **More info → Run anyway**. You only need to do this once.
 
 === "Build it yourself"
+
+    Only needed if you want to compile ScriptOS from the source code.
+    First [download or clone the repository](https://github.com/LUKASinScience/ScriptOS){ target="_blank" rel="noopener" },
+    then open a terminal in its folder.
 
     ```bash
     ./build.sh          # macOS: produces dist/ScriptOS.app
     ./make_dmg.sh        # macOS: produces ScriptOS.dmg
     ```
 
-    On Windows, run `build_windows.bat` — see BUILD_WINDOWS.md in the repo root.
+    On Windows, run `build_windows.bat` — see
+    [BUILD_WINDOWS.md](https://github.com/LUKASinScience/ScriptOS/blob/main/BUILD_WINDOWS.md){ target="_blank" rel="noopener" }.
 
 === "Developer mode"
 
     Only needed if you're changing ScriptOS's own code — end users never do this.
+    Requires [Python 3](https://www.python.org/downloads/){ target="_blank" rel="noopener" }.
 
     ```bash
     python3 -m venv .venv
@@ -46,11 +75,25 @@ isn't worth the complexity for a rarely-toggled setting.
 Whichever way you start it, use the **house icon** (top left) any time to get back to
 your loaded script — it works from anywhere, including the Environments page.
 
-## Try everything: a full walkthrough
+## Your first run in 2 minutes
+
+![Analysis card for a loaded script](assets/shots/analyze-run.png)
+
+1. Start ScriptOS and **drag a `.py` or `.R` file** onto the window (or use **File → Open**).
+2. Read the **analysis card**: it lists the script's parameters and any missing packages.
+3. Fill in the fields, then click **Run**.
+4. Watch the **Logs** tab live; results appear in the **Files** tab.
+
+No script at hand? The [repository](https://github.com/LUKASinScience/ScriptOS/tree/main/tests/fixtures){ target="_blank" rel="noopener" }
+contains small example scripts in `tests/fixtures/` — the walkthrough below uses them.
+
+## Walkthrough: the basics
 
 Every path below is a real file already in the ScriptOS project — clone/open the
 project folder and follow along exactly. Nothing here needs the internet except
 the one-time environment/package installs.
+
+These four steps cover everyday use. Want more? Continue with [Advanced](#walkthrough-advanced).
 
 ### 1. Run a plain script (no dependencies, no environment needed)
 ![analyze.py after a successful run: logs and a reproducibility summary](assets/shots/analyze-run.png)
@@ -108,6 +151,10 @@ the one-time environment/package installs.
 3. Load `tests/fixtures/runnable_r_tool.R` — no extra dependencies, safe to run immediately.
 4. Set **Input** to `tests/fixtures/samples.csv`, click **Run** — same workflow as Python,
    just a different interpreter under the hood.
+
+## Walkthrough: advanced
+
+Optional extras: workflows, the command line, safety checks and limits. Same example files as above.
 
 ### 5. Chain two scripts as a workflow
 ![Workflows page](assets/shots/workflows.png)
@@ -188,9 +235,14 @@ Rscript -e 'install.packages("optparse", repos="https://cloud.r-project.org")'
 
 `optparse` is what ScriptOS's R parameter discovery looks for (`make_option()` calls).
 
+## Appearance
+
+**Light mode is the default.** Switch via **View → Appearance → Dark / Light** in
+the menu bar. ScriptOS offers to restart so the change applies cleanly.
+
 ## What ScriptOS is not
 
-- Not a workflow engine — one script, one run
+- Not a full pipeline engine — workflows are simple linear chains
 - Not a replacement for the command line for people who already use it
 - Never installs anything without you clicking a button first
 - Never touches your OS keychain — the secrets wallet is entirely local to `~/.scriptos`

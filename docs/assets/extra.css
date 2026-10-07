@@ -1,0 +1,4 @@
+:root { --md-primary-fg-color: #4f46e5; --md-accent-fg-color: #4f46e5; }
+.md-typeset h1 { font-weight: 700; }
+.md-typeset .md-button { margin: .2rem .4rem .8rem 0; }
+.md-typeset img { border-radius: 8px; }
